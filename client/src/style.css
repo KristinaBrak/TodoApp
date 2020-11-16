@@ -1,0 +1,15 @@
+.nav-bar {
+  color: white;
+  background: lightpink;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  background: lightpink;
+}

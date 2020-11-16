@@ -1,0 +1,10 @@
+.randomImage {
+  width: 160px;
+  display: flex;
+  justify-content: center;
+  background-color: hsla(0, 0%, 29%, 1);
+}
+.randomImage img {
+  height: 80px;
+  max-width: 160px;
+}

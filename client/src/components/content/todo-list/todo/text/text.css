@@ -1,0 +1,7 @@
+#editable-text {
+  place-self: center;
+}
+
+input#editable-text {
+  max-width: 100px;
+}

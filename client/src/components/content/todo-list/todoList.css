@@ -1,0 +1,55 @@
+body {
+  background-color: whitesmoke;
+}
+
+.todoList {
+  background-color: white;
+  color: hsla(315, 100%, 36%, 1);
+  margin: auto;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 10px 10px 30px 10px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 10px 0 -5px #eee,
+    0 10px 1px -4px rgba(0, 0, 0, 0.15), 0 20px 0 -10px #eee,
+    0 20px 1px -9px rgba(0, 0, 0, 0.15);
+}
+
+.todoList input[type="text"] {
+  border: 1px solid hsla(351, 100%, 86%, 1);
+  border-radius: 0.3em;
+  width: 15em;
+}
+
+.todoList .add {
+  border-color: hsla(351, 100%, 86%, 1);
+  background-color: hsla(351, 100%, 86%, 1);
+  color: white;
+  border-radius: 0.2em;
+  width: 8em;
+  height: auto;
+  margin-top: 0.2em;
+}
+
+.todoList .add:hover {
+  background-color: hsla(315, 63%, 70%, 1);
+  border-color: hsla(315, 63%, 70%, 1);
+}
+
+.todoList .add:active {
+  background-color: hsla(315, 100%, 36%, 1);
+  border-color: hsla(315, 100%, 36%, 1);
+}
+
+.todoList animated.div {
+  width: 100%;
+}
+
+@media screen and (max-width: 300px) {
+  .todoList {
+    width: 360px;
+  }
+} ;
