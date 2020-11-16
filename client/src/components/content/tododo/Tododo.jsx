@@ -19,11 +19,11 @@ const Tododo = () => {
               <Todo
                 key={todo.id}
                 id={todo.id}
-                isDone={todo.isCompleted}
-                name={todo.title}
+                isCompleted={todo.isCompleted}
+                title={todo.title}
                 onRemove={() => {}}
-                onSetTodoDone={() => {}}
-                onSetTodoName={() => {}}
+                onSetTodoCompleted={() => {}}
+                onSetTodoTitle={() => {}}
               />
             );
           })

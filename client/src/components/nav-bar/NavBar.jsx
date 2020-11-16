@@ -4,8 +4,8 @@ import NavLink from "./NavLink";
 const NavBar = () => {
   return (
     <ul className="nav-bar">
-      <NavLink name="Home" to="/" />
-      <NavLink name="Todos" to="/todos" />
+      <NavLink title="Home" to="/" />
+      <NavLink title="Todos" to="/todos" />
     </ul>
   );
 };

@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./text.css";
 
-const Text = ({ id, name, isDone, onSetTodoName }) => {
+const Text = ({ id, title, isCompleted, onSetTodoTitle }) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [tempName, setTempName] = useState(name);
+  const [tempTitle, setTempTitle] = useState(title);
   if (!isEdit) {
     return (
       <p
         id="editable-text"
-        className={isDone ? "completed" : undefined}
+        className={isCompleted ? "completed" : undefined}
         onClick={() => setIsEdit(true)}
       >
-        {name}
+        {title}
       </p>
     );
   } else {
@@ -20,24 +20,24 @@ const Text = ({ id, name, isDone, onSetTodoName }) => {
       <input
         type="text"
         id="editable-text"
-        className={isDone ? "completed" : undefined}
+        className={isCompleted ? "completed" : undefined}
         onBlur={() => {
           setIsEdit(false);
-          onSetTodoName(id, tempName);
+          onSetTodoTitle(id, tempTitle);
         }}
         onChange={(event) => {
-          setTempName(event.target.value);
+          setTempTitle(event.target.value);
         }}
         onKeyDown={({ key }) => {
           if (key === "Enter") {
             setIsEdit(false);
-            onSetTodoName(id, tempName);
+            onSetTodoTitle(id, tempTitle);
           } else if (key === "Escape") {
             setIsEdit(false);
-            setTempName(name);
+            setTempTitle(title);
           }
         }}
-        value={tempName}
+        value={tempTitle}
       />
     );
   }
@@ -45,44 +45,9 @@ const Text = ({ id, name, isDone, onSetTodoName }) => {
 
 Text.propTypes = {
   id: PropTypes.string,
-  isDone: PropTypes.bool,
-  name: PropTypes.string,
-  onSetTodoName: PropTypes.func,
+  isCompleted: PropTypes.bool,
+  title: PropTypes.string,
+  onSetTodoTitle: PropTypes.func,
 };
 
 export default Text;
-
-//     {
-//         (!isEdit) ? (
-//           <p
-//             id="editable-text"
-//             className={isDone ? "completed" : undefined}
-//             onClick={() => setIsEdit(true)}
-//           >
-//             {name}
-//           </p>
-//         ) : (
-//           <input
-//             type="text"
-//             id="editable-text"
-//             className={isDone ? "completed" : undefined}
-//             onBlur={() => {
-//               setIsEdit(false);
-//               onSetTodoName(id, tempName);
-//             }}
-//             onChange={(event) => {
-//               setTempName(event.target.value);
-//             }}
-//             onKeyDown={({ key }) => {
-//               if (key === "Enter") {
-//                 setIsEdit(false);
-//                 onSetTodoName(id, tempName);
-//               } else if (key === "Escape") {
-//                 setIsEdit(false);
-//                 setTempName(name);
-//               }
-//             }}
-//             value={tempName}
-//           />
-//         );
-//}

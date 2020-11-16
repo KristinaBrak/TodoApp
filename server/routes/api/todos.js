@@ -13,7 +13,6 @@ router.get("/:userId", (req, res) => {
         todoUserId === userId ? [...accumulator, currentValue] : accumulator,
       []
     );
-
     res.send(todos);
   } else {
     res.sendStatus(422);
@@ -23,9 +22,14 @@ router.get("/:userId", (req, res) => {
 //create todo
 router.post("/:userId", (req, res) => {
   const userId = req.params.userId;
+  if (Users[userId] === undefined) {
+    res.sendStatus(422);
+  }
+
   const todoTitle = req.body.title;
-  console.log(userId);
-  if (todoTitle !== undefined && userId !== undefined) {
+  if (todoTitle === undefined) {
+    res.sendStatus(422);
+  } else {
     Todos.data.lastId = Todos.data.lastId + 1;
     Todos.data.byId[Todos.data.lastId] = {
       id: Todos.data.lastId,
@@ -38,31 +42,29 @@ router.post("/:userId", (req, res) => {
 });
 
 //delete todo by id
-//TODO add user authenticating if
 router.delete("/:userId", (req, res) => {
+  const userId = req.params.userId;
+  if (Users[userId] === undefined) {
+    res.sendStatus(422);
+  }
+
   const todoId = req.body.todoId;
   const todo = Todos.data.byId[todoId];
-  if (todo !== undefined) {
-    delete Todos.data.byId[todoId];
-    if (todoId === Todos.data.lastId) {
-      const keys = Object.keys(Todos.data.byId);
-      const maxValue = keys.reduce((max, todo) => {
-        const todoVal = parseInt(todo);
-        if (todoVal > max) {
-          max = todoVal;
-        }
-        return max;
-      }, 0);
-      Todos.data.lastId = maxValue;
-    }
-    res.sendStatus(200);
+  if (todo === undefined) {
+    res.sendStatus(422);
   } else {
+    delete Todos.data.byId[todoId];
     res.sendStatus(200);
   }
 });
 
+//update todo
 router.patch("/:userId", (req, res) => {
   const userId = req.params.userId;
+  if (Users[userId] === undefined) {
+    res.sendStatus(422);
+  }
+
   const { id, title, isCompleted } = req.body;
   if ([id, title, isCompleted].includes(undefined)) {
     res.sendStatus(422);

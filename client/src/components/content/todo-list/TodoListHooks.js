@@ -7,8 +7,8 @@ export const useTodos = (initialTodos) => {
   const addTodo = (text) => {
     const todo = {
       id: uuid(),
-      name: text,
-      isDone: false,
+      title: text,
+      isCompleted: false,
     };
     const updatedTodos = [...todos, todo];
 
@@ -20,19 +20,19 @@ export const useTodos = (initialTodos) => {
     setTodos(updatedTodos);
   };
 
-  const setTodoDone = (id) => {
+  const setTodoCompleted = (id) => {
     const updatedTodos = [...todos];
     const todo = updatedTodos.filter((todo) => todo.id === id);
-    todo[0].isDone = !todo[0].isDone;
+    todo[0].isCompleted = !todo[0].isCompleted;
     setTodos(updatedTodos);
   };
 
-  const setTodoName = (id, value) => {
+  const setTodoTitle = (id, value) => {
     const updatedTodos = [...todos];
     const todo = updatedTodos.filter((todo) => todo.id === id);
-    todo[0].name = value;
+    todo[0].title = value;
     setTodos(updatedTodos);
   };
 
-  return [todos, addTodo, removeTodo, setTodoDone, setTodoName];
+  return [todos, addTodo, removeTodo, setTodoCompleted, setTodoTitle];
 };

@@ -6,11 +6,11 @@ import "./todoList.css";
 import { useTodos } from "./TodoListHooks";
 
 const TodoList = () => {
-  const [todos, addTodo, removeTodo, setTodoDone, setTodoName] = useTodos([
-    { id: uuid(), name: "Eat Boots", isDone: false },
-    { id: uuid(), name: "Sleep", isDone: false },
-    { id: uuid(), name: "Rap", isDone: false },
-    { id: uuid(), name: "Repeat", isDone: false },
+  const [todos, addTodo, removeTodo, setTodoCompleted, setTodoTitle] = useTodos([
+    { id: uuid(), title: "Eat Boots", isCompleted: false },
+    { id: uuid(), title: "Sleep", isCompleted: false },
+    { id: uuid(), title: "Rap", isCompleted: false },
+    { id: uuid(), title: "Repeat", isCompleted: false },
   ]);
   const [text, setText] = useState("");
 
@@ -41,16 +41,16 @@ const TodoList = () => {
       </button>
       {animatedTodos
         .reverse()
-        .map(({ item: { id, name, isDone }, props, key }) => {
+        .map(({ item: { id, title, isCompleted }, props, key }) => {
           return (
             <animated.div key={key} style={{ ...props }}>
               <Todo
                 id={id}
-                isDone={isDone}
-                name={name}
+                isCompleted={isCompleted}
+                title={title}
                 onRemove={removeTodo}
-                onSetTodoDone={setTodoDone}
-                onSetTodoName={setTodoName}
+                onSetTodoCompleted={setTodoCompleted}
+                onSetTodoTitle={setTodoTitle}
               />
             </animated.div>
           );

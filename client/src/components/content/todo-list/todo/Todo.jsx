@@ -4,14 +4,14 @@ import RandomImage from "./random-image/RandomImage";
 import Text from "./text/Text";
 import "./todo.css";
 
-const Todo = ({ id, isDone, name, onRemove, onSetTodoDone, onSetTodoName }) => (
+const Todo = ({ id, isCompleted, title, onRemove, onSetTodoCompleted, onSetTodoTitle }) => (
   <div className="todo-element">
     <div className="checkbox">
-      <input type="checkbox" onClick={() => onSetTodoDone(id)} id={id} />
+      <input type="checkbox" onClick={() => onSetTodoCompleted(id)} id={id} />
       <label htmlFor={id}></label>
     </div>
     <div className="todo-text">
-      <Text id={id} isDone={isDone} name={name} onSetTodoName={onSetTodoName} />
+      <Text id={id} isCompleted={isCompleted} title={title} onSetTodoTitle={onSetTodoTitle} />
     </div>
     <div className="randomImage">
       <RandomImage />
@@ -25,11 +25,11 @@ const Todo = ({ id, isDone, name, onRemove, onSetTodoDone, onSetTodoName }) => (
 
 Todo.propTypes = {
   id: PropTypes.string,
-  isDone: PropTypes.bool,
-  name: PropTypes.string,
-  markSubmit: PropTypes.func,
+  isCompleted: PropTypes.bool,
+  title: PropTypes.string,
+  setTodoCompleted: PropTypes.func,
   onRemove: PropTypes.func,
-  onSetTodoName: PropTypes.func,
+  onSetTodoTitle: PropTypes.func,
 };
 
 export default Todo;
