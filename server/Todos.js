@@ -28,7 +28,7 @@ const Todos = {
       4: {
         id: 4,
         title: "Eat broccolli",
-        isCompleted: false,
+        isCompleted: true,
         userId: "daee626a-c361-4151-9e88-630a3e53f412",
       },
       5: {

@@ -1,4 +1,5 @@
 const express = require("express");
+const { getImage } = require("../../external-api/Images");
 const Todos = require("../../Todos");
 const Users = require("../../Users");
 const router = express.Router();
@@ -20,12 +21,13 @@ router.get("/:userId", (req, res) => {
 });
 
 //create todo
-router.post("/:userId", (req, res) => {
+router.post("/:userId", async (req, res) => {
   const userId = req.params.userId;
   if (Users[userId] === undefined) {
     res.sendStatus(422);
   }
 
+  const image = await getImage().catch(() => "");
   const todoTitle = req.body.title;
   if (todoTitle === undefined) {
     res.sendStatus(422);
@@ -35,7 +37,8 @@ router.post("/:userId", (req, res) => {
       id: Todos.data.lastId,
       title: todoTitle,
       isCompleted: false,
-      userId: userId,
+      image,
+      userId,
     };
   }
   res.sendStatus(200);
@@ -48,7 +51,7 @@ router.delete("/:userId", (req, res) => {
     res.sendStatus(422);
   }
 
-  const todoId = req.body.todoId;
+  const todoId = req.body.id;
   const todo = Todos.data.byId[todoId];
   if (todo === undefined) {
     res.sendStatus(422);
@@ -58,20 +61,21 @@ router.delete("/:userId", (req, res) => {
   }
 });
 
-//update todo
+//update
 router.patch("/:userId", (req, res) => {
   const userId = req.params.userId;
   if (Users[userId] === undefined) {
     res.sendStatus(422);
   }
-
   const { id, title, isCompleted } = req.body;
   if ([id, title, isCompleted].includes(undefined)) {
+    console.log(id, " ", title, " ", isCompleted);
     res.sendStatus(422);
   } else {
     Todos.data.byId[id].title = title;
     Todos.data.byId[id].isCompleted = isCompleted;
     res.sendStatus(200);
+    console.log("update", Todo.data.byId[id]);
   }
 });
 
