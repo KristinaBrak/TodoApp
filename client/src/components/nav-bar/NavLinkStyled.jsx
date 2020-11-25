@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Anchor from "components/miscellaneous/Anchor";
 
 const NavLinkStyled = styled.li`
   width: 100%;

@@ -1,60 +1,51 @@
-import React, { useState } from "react";
-import { useTransition, animated } from "react-spring";
-import { v4 as uuid } from "uuid";
-import Todo from "./todo/Todo";
+import React, { useEffect, useState } from "react";
+import useAPI from "ApiHook";
+import { SERVER_TODOS_URL, USER_ID } from "consts";
+import Loader from "components/miscellaneous/Loader";
+import Todo from "../todo-list/todo/Todo";
+import TodoAddForm from "./todo-add-form/TodoAddForm";
+import todoApi from "../todo-list/TodoAPI";
 import "./todoList.css";
-import { useTodos } from "./TodoListHooks";
 
 const TodoList = () => {
-  const [todos, addTodo, removeTodo, setTodoCompleted, setTodoTitle] = useTodos([
-    { id: uuid(), title: "Eat Boots", isCompleted: false },
-    { id: uuid(), title: "Sleep", isCompleted: false },
-    { id: uuid(), title: "Rap", isCompleted: false },
-    { id: uuid(), title: "Repeat", isCompleted: false },
-  ]);
-  const [text, setText] = useState("");
+  const url = SERVER_TODOS_URL + "/" + USER_ID;
+  const [todos, setTodos] = useState([]);
+  const [loading, error, data, reload] = useAPI(url);
 
-  const animatedTodos = useTransition(todos, (todo) => todo.id, {
-    from: { opacity: 0, transform: "translateX(-200px)" },
-    enter: { opacity: 1, transform: "translateX(0)" },
-    leave: { opacity: 0, transform: "translateX(200px)" },
-  });
+  const [addTodo, removeTodo, updateTodo] = todoApi(url, reload);
+
+  useEffect(() => {
+    if (data) {
+      setTodos(data);
+    }
+  }, [data]);
+
+  if (loading) {
+    return <Loader />;
+  }
+  if (error) {
+    return <div>Error</div>;
+  }
 
   return (
     <div className="todoList">
-      <h2>Todo List</h2>
-
-      <input
-        type="text"
-        value={text}
-        onChange={(event) => setText(event.target.value)}
-      />
-
-      <button
-        className="add"
-        onClick={() => {
-          addTodo(text);
-          setText("");
-        }}
-      >
-        Add
-      </button>
-      {animatedTodos
-        .reverse()
-        .map(({ item: { id, title, isCompleted }, props, key }) => {
+      <TodoAddForm addTodo={addTodo} />
+      <div>
+        {todos.reverse().map((todo) => {
           return (
-            <animated.div key={key} style={{ ...props }}>
-              <Todo
-                id={id}
-                isCompleted={isCompleted}
-                title={title}
-                onRemove={removeTodo}
-                onSetTodoCompleted={setTodoCompleted}
-                onSetTodoTitle={setTodoTitle}
-              />
-            </animated.div>
+            <Todo
+              key={todo.id}
+              id={todo.id}
+              isCompleted={todo.isCompleted}
+              image={todo.image}
+              title={todo.title}
+              onRemove={removeTodo}
+              onSetTodoCompleted={updateTodo}
+              onSetTodoTitle={updateTodo}
+            />
           );
         })}
+      </div>
     </div>
   );
 };
