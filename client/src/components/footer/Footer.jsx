@@ -1,11 +1,8 @@
 import React from "react";
+import FooterStyle from "./FooterStyle";
 
 const Footer = () => {
-  return (
-    <div className="footer">
-      <p>Love kittens! That's an order! </p>
-    </div>
-  );
+  return <FooterStyle>Love kittens! That's an order!</FooterStyle>;
 };
 
 export default Footer;

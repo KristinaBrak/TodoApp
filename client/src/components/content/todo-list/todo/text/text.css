@@ -6,3 +6,23 @@ input#editable-text {
   text-decoration-line: none;
   max-width: 100px;
 }
+
+p .completed {
+  text-decoration: line-through;
+  align-self: center;
+}
+
+input .completed {
+  text-decoration: none;
+  align-self: left;
+}
+
+#editable-text::selection {
+  background: hsla(315, 63%, 70%, 1);
+  color: white;
+}
+
+input#editable-text:focus {
+  outline: none;
+  border-color: hsla(351, 100%, 86%, 1);
+}

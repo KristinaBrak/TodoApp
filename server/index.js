@@ -10,35 +10,35 @@ const sequelize = new Sequelize("mydb", "kristina", "234234231", {
   dialect: "postgres",
 });
 
-const User = sequelize.define(
-  "User",
-  {
-    // Model attributes are defined here
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      // allowNull defaults to true
-    },
-  },
-  {
-    // Other model options go here
-  }
-);
+// const User = sequelize.define(
+//   "User",
+//   {
+//     // Model attributes are defined here
+//     firstName: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//     },
+//     lastName: {
+//       type: DataTypes.STRING,
+//       // allowNull defaults to true
+//     },
+//   },
+//   {
+//     // Other model options go here
+//   }
+// );
 
-const testingDb = async () => {
-  sequelize.sync();
-  try {
-    await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
-  } catch (error) {
-    console.error("Unable to connect to the database:", error);
-  }
-};
+// const testingDb = async () => {
+//   sequelize.sync();
+//   try {
+//     await sequelize.authenticate();
+//     console.log("Connection has been established successfully.");
+//   } catch (error) {
+//     console.error("Unable to connect to the database:", error);
+//   }
+// };
 
-testingDb();
+// testingDb();
 
 const port = 3300;
 

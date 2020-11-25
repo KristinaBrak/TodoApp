@@ -4,24 +4,33 @@ const useAPI = (url) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [data, setData] = useState();
+  const [shouldReload, setShouldReload] = useState(true);
 
   const fetchData = () => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-        setData(json);
-        setLoading(false);
-        setError("");
-      })
-      .catch((err) => {
-        setLoading(false);
-        setError(err.message);
-      });
+    if (shouldReload) {
+      fetch(url)
+        .then((response) => response.json())
+        .then((json) => {
+          setData(json);
+          setShouldReload(false);
+          setLoading(false);
+          setError("");
+        })
+        .catch((err) => {
+          setShouldReload(false);
+          setLoading(false);
+          setError(err.message);
+        });
+    }
   };
 
-  useEffect(fetchData, [url]);
+  useEffect(fetchData, [url, shouldReload]);
 
-  return [loading, error, data];
+  const reload = () => {
+    setShouldReload(true);
+  };
+
+  return [loading, error, data, reload];
 };
 
 export default useAPI;

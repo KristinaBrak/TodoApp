@@ -5,6 +5,7 @@ import "./text.css";
 const Text = ({ id, title, isCompleted, onSetTodoTitle }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [tempTitle, setTempTitle] = useState(title);
+
   if (!isEdit) {
     return (
       <p
@@ -31,7 +32,7 @@ const Text = ({ id, title, isCompleted, onSetTodoTitle }) => {
         onKeyDown={({ key }) => {
           if (key === "Enter") {
             setIsEdit(false);
-            onSetTodoTitle(id, tempTitle);
+            onSetTodoTitle({ id, title: tempTitle, isCompleted });
           } else if (key === "Escape") {
             setIsEdit(false);
             setTempTitle(title);

@@ -1,12 +1,12 @@
 import React from "react";
 import NavLink from "./NavLink";
-
+import NavBarStyled from "./NavBarStyle";
 const NavBar = () => {
   return (
-    <ul className="nav-bar">
+    <NavBarStyled>
       <NavLink title="Home" to="/" />
       <NavLink title="Todos" to="/todos" />
-    </ul>
+    </NavBarStyled>
   );
 };
 

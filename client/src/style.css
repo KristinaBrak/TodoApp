@@ -1,15 +1,4 @@
-.nav-bar {
+body::selection {
   color: white;
-  background: lightpink;
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-.footer {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  background: lightpink;
+  background: hsla(315, 63%, 70%, 1);
 }
