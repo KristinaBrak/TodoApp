@@ -1,4 +1,3 @@
-body::selection {
-  color: white;
+.app::selection {
   background: hsla(315, 63%, 70%, 1);
 }
