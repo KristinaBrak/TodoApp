@@ -1,3 +1,4 @@
+import Button from "components/miscellaneous/Button";
 import React, { useState } from "react";
 import "./todo-add-form.css";
 
@@ -20,7 +21,7 @@ const TodoAddForm = ({ addTodo }) => {
         }}
       />
 
-      <button
+      <Button
         className="add"
         onClick={() => {
           addTodo(text);
@@ -28,7 +29,7 @@ const TodoAddForm = ({ addTodo }) => {
         }}
       >
         Add
-      </button>
+      </Button>
     </div>
   );
 };
