@@ -3,42 +3,7 @@ const logger = require("./middleware/logger");
 const path = require("path");
 const cors = require("cors");
 const app = express();
-const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = new Sequelize("mydb", "kristina", "234234231", {
-  host: "localhost",
-  dialect: "postgres",
-});
-
-// const User = sequelize.define(
-//   "User",
-//   {
-//     // Model attributes are defined here
-//     firstName: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//     lastName: {
-//       type: DataTypes.STRING,
-//       // allowNull defaults to true
-//     },
-//   },
-//   {
-//     // Other model options go here
-//   }
-// );
-
-// const testingDb = async () => {
-//   sequelize.sync();
-//   try {
-//     await sequelize.authenticate();
-//     console.log("Connection has been established successfully.");
-//   } catch (error) {
-//     console.error("Unable to connect to the database:", error);
-//   }
-// };
-
-// testingDb();
 
 const port = 3300;
 

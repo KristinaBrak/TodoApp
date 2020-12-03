@@ -1,36 +1,38 @@
 const express = require("express");
-const { v4: uuid } = require("uuid");
+const db = require("../../models/index");
 const router = express.Router();
-const Todos = require("../../Todos");
 
 //create new user
-router.post("/:userId", (req, res) => {
+router.post("/:userId", async (req, res) => {
   const userId = req.params.userId;
-  // console.log(req.params.userId);
-  if (Todos[userId] === undefined) {
-    const newUserId = uuid();
-    const todos = req.body;
-    if (todos === undefined) {
-      Todos[newUserId] = [];
-    } else {
-      Todos[newUserId] = todos;
-    }
-    res.sendStatus(200);
-  } else {
-    res.sendStatus(422);
+  const user = await db.User.findOne({ where: { id: Number(userId) } }).catch(
+    () => null
+  );
+
+  if (user === null) {
+    const name = req.body.name;
+    await db.User.create({
+      name: name,
+    });
+    return res.sendStatus(200);
   }
+  return res.sendStatus(422);
 });
 
-router.delete("/:userId", (req, res) => {
+router.delete("/:userId", async (req, res) => {
   const userId = req.params.userId;
-  const todos = Todos[userId];
-  if (todos !== undefined) {
-    console.log(Todos.join);
-    delete Todos[userId];
-    // console.log(Todos[userId]);
-    res.sendStatus(200);
-  } else {
-    res.sendStatus(422);
+
+  const todos = await db.Todo.findAll({ where: { userId } }).catch(() => null);
+  if (todos !== null) {
+    todos.map(async (todo) => {
+      await todo.destroy();
+    });
   }
+
+  const user = await db.User.findOne({ where: { id: userId } }).catch(
+    () => null
+  );
+  await user.destroy();
+  return res.sendStatus(200);
 });
 module.exports = router;
