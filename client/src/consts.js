@@ -3,4 +3,4 @@ export const GIPHY_URL =
 
 export const SERVER_TODOS_URL = "http://localhost:3300/api/todos";
 
-export const USER_ID = "daee626a-c361-4151-9e88-630a3e53f412";
+export const USER_ID = 2;

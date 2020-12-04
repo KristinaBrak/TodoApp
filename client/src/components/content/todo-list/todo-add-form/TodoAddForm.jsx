@@ -1,12 +1,13 @@
 import Button from "components/miscellaneous/Button";
 import React, { useState } from "react";
-import "./todo-add-form.css";
+import TodoAddFormStyle from "./TodoAddFormStyle";
+// import "./todo-add-form.css";
 
 const TodoAddForm = ({ addTodo }) => {
   const [text, setText] = useState("");
 
   return (
-    <div className="todo-add">
+    <TodoAddFormStyle>
       <input
         type="text"
         value={text}
@@ -30,7 +31,7 @@ const TodoAddForm = ({ addTodo }) => {
       >
         Add
       </Button>
-    </div>
+    </TodoAddFormStyle>
   );
 };
 

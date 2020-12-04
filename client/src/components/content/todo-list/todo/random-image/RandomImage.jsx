@@ -1,10 +1,11 @@
 import React from "react";
+import RandomImageStyle from "./RandomImageStyle";
 
 const RandomImage = ({ image }) => {
   return (
-    <div className="randomImage">
+    <RandomImageStyle>
       <img src={image} alt={image} />
-    </div>
+    </RandomImageStyle>
   );
 };
 

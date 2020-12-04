@@ -5,7 +5,7 @@ import Loader from "components/miscellaneous/Loader";
 import Todo from "../todo-list/todo/Todo";
 import TodoAddForm from "./todo-add-form/TodoAddForm";
 import todoApi from "../todo-list/TodoAPI";
-import "./todoList.css";
+import TodoListStyle from "./TodoListStyle";
 
 const TodoList = () => {
   const url = SERVER_TODOS_URL + "/" + USER_ID;
@@ -28,7 +28,7 @@ const TodoList = () => {
   }
 
   return (
-    <div className="todoList">
+    <TodoListStyle>
       <TodoAddForm addTodo={addTodo} />
       <div>
         {todos.reverse().map((todo) => {
@@ -46,7 +46,7 @@ const TodoList = () => {
           );
         })}
       </div>
-    </div>
+    </TodoListStyle>
   );
 };
 
